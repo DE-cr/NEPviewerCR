@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+# project: https://github.com/DE-cr/NEPviewerCR
+# file: NEPviewerCR.html
+-->
+<html>
+  <head>
+    <title>NEPviewerCR</title>
+  </head>
+  <body>
+    <div id='c3'></div>
+    <style>
+      svg, .c3-tooltip { font: 10px sans-serif }
+      div path, line { fill: none; stroke: #aaa }
+      .c3-focused { opacity: 1; stroke-width: 2px }
+      .c3-defocused, .c3-legend-item-hidden { opacity: 0.5 !important }
+      .c3-tooltip { opacity: 0.7; background-color: #eee }
+      th { background-color: #ccc }
+      .value { text-align: right }
+    </style>
+    <script src='https://d3js.org/d3.v4.min.js '></script>
+    <script src='https://cdn.jsdelivr.net/npm/c3 '></script>
+    <script>
+      // use browser plugin to unblock CORS!
+      fetch('http://nep.nepviewer.com/pv_monitor/appservice/detail/<<SN>>', {
+        method: 'POST',
+        body: 'token=<<token>>'
+      })
+      .then(response => response.json())
+      .then(json => {
+        let data = [];
+        let kwh = 0;
+        for (let i=0; i<json.length; ++i) {
+          if (json[i][1] == null) continue;
+          let xtime = new Date(json[i][0]).toISOString().substring(0,16);
+          if (i) {
+            let interval =  json[i][0] - json[i-1][0];
+            let meanwatt = (json[i][1] + json[i-1][1]) / 2;
+            kwh += (interval/1000/60/60) * (meanwatt/1000);
+          }
+          else document.title = xtime.substring(0,10);
+          let row = [];
+          row['time'] = xtime;
+          row['W'] = json[i][1];
+          row['kWh'] = Math.round(kwh*1000)/1000;
+          data.push(row);
+        }
+        let graph = c3.generate({
+          bindto: '#c3',
+          data: {
+            json: data,
+            keys: { x: 'time', value: ['W','kWh'] },
+            axes: { kWh: 'y2' },
+            names: { W: 'Power [W]', kWh: 'Energy [kWh]' },
+            xFormat: '%Y-%m-%dT%H:%M',
+          },
+          axis: {
+            x: { type: 'timeseries', tick: { count: 2, format: '%H:%M' } },
+            y:  { min: 0, padding: { bottom: 0, top: 0 } },
+            y2: { min: 0, padding: { bottom: 0, top: 0 }, show: true },
+          },
+          point: { show: false },
+          zoom: { enabled: true },
+          size: { height: window.innerHeight - 20 },
+          onresize: function(){graph.resize({height: window.innerHeight-20})},
+        });
+      });
+    </script>
+  </body>
+</html>
