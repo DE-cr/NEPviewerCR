@@ -8,7 +8,7 @@ Utility files to view selected data uploaded by [NEP micro inverter systems](htt
 
 ### NEPviewerCR.pl
 
-Perl script to download the current (actually: most recent) day's power values, as transmitted (up to) every five minutes to the cloud. The resulting total energy is also calculated (as the integral of the power curve); note that the calculated energy values are usually off by quite a margin from the (much more realistic) total day's energy value determined by the micro converter system, which is also transmitted to the cloud. The power/energy pairs for each sample timepoint available are printed (e.g. `2023-07-12 12:48 = 548 W`), e.g. to save into a database. The resulting curves are also displayed.
+Perl script to download the current (actually: most recent) day's power values, as transmitted (up to) every five minutes to the cloud. The resulting total energy is also calculated (as the integral of the power curve); note that the calculated energy values are usually off by quite a margin from the (much more realistic) total day's energy value determined by the micro converter system, which is also transmitted to the cloud. The power/energy pairs for each sample timepoint available are printed (e.g. `2023-07-12 12:48 = 548 W`), e.g. to save into a database. The resulting curves are also displayed, and if run on an X11 system, allow for some interaction (replace `x11` in the script with `windows` for use on MS Windows systems).
 
 **Requirements:**
 - perl (obviously)
@@ -22,7 +22,7 @@ Perl script to download the current (actually: most recent) day's power values, 
 
 ### NEPviewerCR.html
 
-HTML page to (differently) display the same curves as NEPviewerCR.pl (see above), and to allow some interaction with them.
+HTML page to (differently) display the same curves as NEPviewerCR.pl (see above), also allowing some interaction with them.
 
 **Requirements:**
 - web browser, with CORS disabled (e.g. using [CORS Everywhere](https://github.com/spenibus/cors-everywhere-firefox-addon) with Firefox)
