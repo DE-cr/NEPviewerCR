@@ -14,7 +14,6 @@ Perl script to download the current (actually: most recent) day's power values, 
 - perl (obviously)
 - wget (still one of the easiest ways to grab a web page)
 - feedgnuplot and the underlying gnuplot (for plotting)
-- imagemagick's display command (to show the plots on graphic terminals)
 - NEPviewerCR.pl, with *your* micro inverter system's info included!
 
 **Example:**
