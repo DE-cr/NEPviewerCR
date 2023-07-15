@@ -30,12 +30,11 @@ while (<>) {
     else {  # first data point
       my $options = q(--y2 1 --domain --timefmt %H:%M --set 'format x "%H"');
       my @special = -t STDOUT && $ENV{DISPLAY}  # graphic or text output?
-                    ? qw(--terminal png --lines
+                    ? qw(--terminal x11 --lines
                          --title 'Date: $date'
                          --xlabel 'Time [hour]'
                          --ylabel 'Power [W]' --y2label 'Energy [kWh]'
-                         --legend 0 Power --legend 1 Energy
-                         | display -)
+                         --legend 0 Power --legend 1 Energy)
                     : '--terminal dumb | tr AB -o';
       ($options .= " @special") =~ s/\$date/$date/g;
       open PLOT, "| feedgnuplot $options";
