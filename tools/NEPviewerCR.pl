@@ -28,7 +28,7 @@ while (<>) {
     if (defined $prev_time)
     { $kwh += ($time - $prev_time) / 3600 * ($watt + $prev_watt) / 2 / 1000; }
     else {  # first data point
-      my $options = q(--y2 1 --domain --timefmt %H:%M --set 'format x "%H"');
+      my $options = q(--y2 1 --domain --timefmt %H:%M --set 'format x "%H:%M"');
       my @special = -t STDOUT && $ENV{DISPLAY}  # graphic or text output?
                     ? qw(--terminal x11 --lines
                          --title 'Date: $date'
