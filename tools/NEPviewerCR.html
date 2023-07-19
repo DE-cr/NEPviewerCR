@@ -24,6 +24,7 @@
       // use browser plugin to unblock CORS!
       fetch('http://nep.nepviewer.com/pv_monitor/appservice/detail/<<SN>>', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: 'token=<<token>>'
       })
       .then(response => response.json())
