@@ -11,7 +11,7 @@
 -->
 <html>
   <head>
-    <title>NEPviewerCR</title>
+    <title>NEPviewerCR+</title>
   </head>
   <body>
     <div style='float:left;width:50%'>
@@ -35,7 +35,6 @@
     <script src='https://d3js.org/d3.v4.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/c3'></script>
     <script>
-      // use browser plugin to unblock CORS!
       let SN = new URLSearchParams(window.location.search).get('SN');
       let date = document.getElementById('date');
       date.value = new Date().toJSON().slice(0,10);
