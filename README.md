@@ -17,7 +17,9 @@ Initially the current day's power curve, the most recent seven days', the most r
 ### NEP Status
 
 There's also `NEPstatusCR.pl`, which can be used on the command line to get the most recent status of a micro inverter registered with the [NEPViewer server](https://nepviewer.com/).
+
 **Example:**
+
 (Replace `efcdab78` with your micro inverter's serial number!)
 ```
 $ perl NEPstatusCR.pl efcdab78
