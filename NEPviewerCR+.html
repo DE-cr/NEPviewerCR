@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+ | NEPviewerCR (https://github.com/DE-cr/NEPviewerCR)
+ | (file NEPviewerCR+.html)
+ | - (partial) replacement for the official nepviewer.com offer to monitor a
+ |   photovoltaic micro inverter registered with their site
+ | - usage: unblock CORS via browser plugin,
+ |   then open this file in the browser with '?SN=...' added to its url,
+ |   where '...' must be replaced with your microinverter's serial number,
+ |   as used in registering this system with nepviewer.com
+-->
+<html>
+  <head>
+    <title>NEPviewerCR</title>
+  </head>
+  <body>
+    <div style='float:left;width:50%'>
+      <input id='date' type='date' onchange='show_day()'>
+      <div id='detail'></div>
+    </div>
+    <div style='float:right;width:50%'>
+      <div id='week'></div>
+      <div id='month'></div>
+      <div id='year'></div>
+    </div>
+    <style>
+      svg, .c3-tooltip { font: 10px sans-serif }
+      div path, line { fill: none; stroke: #aaa }
+      .c3-focused { opacity: 1; stroke-width: 2px }
+      .c3-defocused, .c3-legend-item-hidden { opacity: 0.5 !important }
+      .c3-tooltip { opacity: 0.7; background-color: #eee }
+      th { background-color: #ccc }
+      .value { text-align: right }
+    </style>
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/c3'></script>
+    <script>
+      // use browser plugin to unblock CORS!
+      let SN = new URLSearchParams(window.location.search).get('SN');
+      let date = document.getElementById('date');
+      date.value = new Date().toJSON().slice(0,10);
+      show_day();
+      bar_chart('week');
+      bar_chart('month');
+      bar_chart('year');
+      function show_day() {
+        let sdate = date.value.replace(/-/g,'');
+        fetch('http://user.nepviewer.com/pv_monitor/proxy/history/'+SN+'/'+sdate+'/'+sdate+'/0/1/2')
+        .then(response => response.json())
+        .then(json => {
+          // sample data:
+          // {"data":["2023-05-30 04:53 0 27 226 0 49.6 8 0 0 8a01 0000 \n",---],"totalpage":1,"page":"1"}
+          // 0:Date 1:Time 2:kW 3:V-DC 4:V-AC 5:* 6:Hz 7:°C 8:kWh 9:* 10:8a0? 11:0000 12:\n
+          let lines = json['data'];
+          let data = [];
+          for (let i=0; i<lines.length; ++i) {
+            let col = lines[i].split(' ');
+            data.push( { 'time':col[1], 'W':col[2]*1000, 'kWh':col[8] } );
+          }
+          let graph = c3.generate({
+            bindto: '#detail',
+            data: {
+              json: data,
+              keys: { x: 'time', value: ['W','kWh'] },
+              names: { W: 'Power [W]', kWh: 'Energy [kWh]' },
+              axes: { kWh: 'y2' },
+              xFormat: '%H:%M',
+            },
+            axis: {
+              x: { type: 'timeseries', tick: { count: 2, format: '%H:%M' },
+                   label: '(' + lines.length + ' samples)' },
+              y:  { min: 0, padding: { bottom: 0, top: 0 }, label: 'W' },
+              y2: { min: 0, padding: { bottom: 0, top: 0 }, label: 'kWh',
+                    show: true },
+            },
+            // grid: { x: { show: true }, y: { show: true } },
+            // point: { show: false },
+            zoom: { enabled: true },
+            size: { height: window.innerHeight - 35 },
+            onresize: function(){graph.resize({height: window.innerHeight-35})},
+          });
+        });
+      }
+      function bar_chart(what) {  // what=week/month/year
+        fetch('https://user.nepviewer.com/pv_monitor/proxy/'+what+'/'+SN+'/0/2/')
+        .then(response => response.json())
+        .then(json => {
+          // sample data:
+          // {"meter":0,"arr":[["2024.08.12",3.7],---],"arr2":[]}
+          let row = json['arr'];
+          let data = [];
+          let sum = 0;
+          let i = 0;
+          for (i=0; i<row.length && !row[i][1]; ++i)
+            ;  // skip leading empty data, then process rest
+          for (; i<row.length; ++i) {
+            data.push({ 'x': row[i][0].replace(/[/.]/g,'-'), 'y': row[i][1] });
+            sum += row[i][1];
+          }
+          let graph = c3.generate({
+            bindto: '#' + what,
+            data: { type: 'bar', labels: true, json: data,
+                    keys: { x:'x', value:['y'] } },
+            axis: { x: { type: 'category' },
+                    y: { label: 'kWh (total=' + sum.toFixed(2) + ')'  } },
+            legend: { show: false },
+            tooltip: { show: false },
+            size: { height: (window.innerHeight - 12)/3 },
+            onresize: function(){graph.resize({height: (window.innerHeight-12)/3})},
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
