@@ -7,7 +7,8 @@ Utility file to view selected data uploaded by [NEP micro inverter systems](http
 ## Usage
 
 Temporarily disable CORS in your web browser (e.g. using [CORS Everywhere](https://github.com/spenibus/cors-everywhere-firefox-addon) with Firefox, which thankfully automatically enables the CORS security feature again on each start of Firefox),
-then load `NEPviewerCR+.html`, with your micro inverter's serial number appended in the address like this `file:///.../NEPviewerCR+.html?SN=efcdab78`. The serial number must be as provided in registering your micro inverter with the [NEPViewer server](https://nepviewer.com/)
+then load `NEPviewerCR+.html`, with your micro inverter's serial number appended in the address like this `file:///.../NEPviewerCR+.html?SN=efcdab78`. The serial number must be as provided in registering your micro inverter with the [NEPViewer server](https://nepviewer.com/).
+
 Initially the current day's power curve, the most recent seven days', the most recent twelve months', and the most recent years' cumulative energy will be displayed graphically. Using the date selection control in the top left of the screen, the power curve for any other day can be displayed.
 
 **Example:**
