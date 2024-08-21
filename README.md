@@ -15,7 +15,7 @@ Initially the current day's power and energy curves, the most recent seven days'
 
 ![NEPviewerCR+.html](NEPviewerCR+.png)
 
-### NEPviewerCR.py
+## NEPviewerCR.py
 
 If all you want is a non-interactive plot of a day's power and energy curves, you can also use `NEPviewerCR.py`.
 
@@ -25,7 +25,7 @@ If all you want is a non-interactive plot of a day's power and energy curves, yo
 
 ![NEPviewerCR.py](NEPviewerCR.png)
 
-### NEPstatusCR.pl
+## NEPstatusCR.pl
 
 There's also `NEPstatusCR.pl`, which can be used on the command line to get the most recent status of a micro inverter registered with the [NEPViewer server](https://nepviewer.com/).
 
