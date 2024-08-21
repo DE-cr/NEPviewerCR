@@ -1,21 +1,31 @@
-# NEPviewerCR+
+# NEPviewerCR
 
 **(Partial) NEPViewer replacement for desktop/laptop computers**
 
 Utility file to view selected data uploaded by [NEP micro inverter systems](https://northernep.com/products/microinverters/) to the cloud, instead of using the official iOS/Android NEPViewer app. (Note: This also works for rebranded NEP micro inverters, e.g. those distributed by Anker or Nuasol.)
 
-## Usage
+## NEPviewerCR+.html
 
 Temporarily disable CORS in your web browser (e.g. using [CORS Everywhere](https://github.com/spenibus/cors-everywhere-firefox-addon) with Firefox, which thankfully automatically enables the CORS security feature again on each start of Firefox),
 then load `NEPviewerCR+.html`, with your micro inverter's serial number appended in the address like this `file:///.../NEPviewerCR+.html?SN=efcdab78`. The serial number must be as provided in registering your micro inverter with the [NEPViewer server](https://nepviewer.com/).
 
-Initially the current day's power curve, the most recent seven days', the most recent twelve months', and the most recent years' cumulative energy will be displayed graphically. Using the date selection control in the top left of the screen, the power curve for any other day can be displayed.
+Initially the current day's power and energy curves, the most recent seven days', the most recent twelve months', and the most recent years' cumulative energy will be displayed graphically. Using the date selection control in the top left of the screen, the power curve for any other day can be displayed.
 
 **Example:**
 
 ![NEPviewerCR+.html](NEPviewerCR+.png)
 
-### NEP Status
+### NEPviewerCR.py
+
+If all you want is a non-interactive plot of a day's power and energy curves, you can also use `NEPviewerCR.py`.
+
+**Example:**
+
+`Usage: python3 NEPviewerCR.py serno [yyyymmdd]`
+
+![NEPviewerCR.py](NEPviewerCR.png)
+
+### NEPstatusCR.pl
 
 There's also `NEPstatusCR.pl`, which can be used on the command line to get the most recent status of a micro inverter registered with the [NEPViewer server](https://nepviewer.com/).
 
