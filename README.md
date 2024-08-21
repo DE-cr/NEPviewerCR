@@ -2,7 +2,7 @@
 
 **(Partial) NEPViewer replacement for desktop/laptop computers**
 
-Utility file to view selected data uploaded by [NEP micro inverter systems](https://northernep.com/products/microinverters/) to the cloud, instead of using the official iOS/Android NEPViewer app. (Note: This also works for rebranded NEP micro inverters, e.g. those distributed by Anker or Nuasol.)
+Utility files to view selected data uploaded by [NEP micro inverter systems](https://northernep.com/products/microinverters/) to the cloud, instead of using the official iOS/Android NEPViewer app. (Note: This also works for rebranded NEP micro inverters, e.g. those distributed by Anker or Nuasol.)
 
 ## NEPviewerCR+.html
 
@@ -19,9 +19,9 @@ Initially the current day's power and energy curves, the most recent seven days'
 
 If all you want is a non-interactive plot of a day's power and energy curves, you can also use `NEPviewerCR.py`.
 
-**Example:**
-
 `Usage: python3 NEPviewerCR.py serno [yyyymmdd]`
+
+**Example:**
 
 ![NEPviewerCR.py](NEPviewerCR.png)
 
