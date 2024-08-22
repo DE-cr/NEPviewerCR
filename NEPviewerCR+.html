@@ -81,7 +81,7 @@
         });
       }
       function bar_chart(what) {  // what=week/month/year
-        fetch('https://user.nepviewer.com/pv_monitor/proxy/'+what+'/'+SN+'/0/2/')
+        fetch('http://user.nepviewer.com/pv_monitor/proxy/'+what+'/'+SN+'/0/2/')
         .then(response => response.json())
         .then(json => {
           // sample data:
