@@ -68,13 +68,15 @@
             axis: {
               x: { type: 'timeseries', tick: { count: 2, format: '%H:%M' },
                    label: '(' + lines.length + ' samples)' },
-              y:  { min: 0, padding: { bottom: 0, top: 0 }, label: 'W' },
-              y2: { min: 0, padding: { bottom: 0, top: 0 }, label: 'kWh',
+              y:  { padding: { bottom: 0, top: 0 }, label: 'W' },
+              y2: { padding: { bottom: 0, top: 0 }, label: 'kWh',
                     show: true },
             },
             // grid: { x: { show: true }, y: { show: true } },
             // point: { show: false },
-            zoom: { enabled: true },
+            zoom: { enabled: true, rescale: true,
+              onzoomstart: function() { graph.subchart.show() }
+            },
             size: { height: window.innerHeight - 35 },
             onresize: function(){graph.resize({height: window.innerHeight-35})},
           });
