@@ -49,12 +49,13 @@
         .then(json => {
           // sample data:
           // {"data":["2023-05-30 04:53 0 27 226 0 49.6 8 0 0 8a01 0000 \n",---],"totalpage":1,"page":"1"}
-          // 0:Date 1:Time 2:kW 3:V-DC 4:V-AC 5:* 6:Hz 7:°C 8:kWh 9:* 10:8a0? 11:0000 12:\n
+          // 0:Date 1:Time 2:kW 3:V-DC 4:V-AC 5:* 6:Hz 7:Â°C 8:kWh 9:* 10:8a0? 11:0000 12:\n
           let lines = json['data'];
           let data = [];
-          for (let i=0; i<lines.length-1; ++i) {
+          for (let i=0; i<lines.length; ++i) {
             let col = lines[i].split(' ');
-            data.push( { 'time':col[1], 'W':col[2]*1000, 'kWh':col[8] } );
+            if (col.length > 8)
+              data.push( { 'time':col[1], 'W':col[2]*1000, 'kWh':col[8] } );
           }
           let graph = c3.generate({
             bindto: '#detail',
