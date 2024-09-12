@@ -52,7 +52,7 @@
           // 0:Date 1:Time 2:kW 3:V-DC 4:V-AC 5:* 6:Hz 7:°C 8:kWh 9:* 10:8a0? 11:0000 12:\n
           let lines = json['data'];
           let data = [];
-          for (let i=0; i<lines.length; ++i) {
+          for (let i=0; i<lines.length-1; ++i) {
             let col = lines[i].split(' ');
             data.push( { 'time':col[1], 'W':col[2]*1000, 'kWh':col[8] } );
           }
