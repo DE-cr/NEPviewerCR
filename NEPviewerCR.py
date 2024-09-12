@@ -34,10 +34,13 @@ time_s = []
 w_s = []
 kwh_s = []
 for line in data:
-    date,time,kw,dc,ac,x1,hz,c,kwh,x2,s1,s2 = line.split()
-    time_s.append(datestr2num(time))
-    w_s.append(int(float(kw)*1000))
-    kwh_s.append(float(kwh))
+    f = []
+    f = line.split()
+    if len(f) == 12:
+        date,time,kw,dc,ac,x1,hz,c,kwh,x2,s1,s2 = f
+        time_s.append(datestr2num(time))
+        w_s.append(int(float(kw)*1000))
+        kwh_s.append(float(kwh))
 
 # do plot:
 color_s = [ 'blue', 'orange' ]
