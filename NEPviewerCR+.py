@@ -66,7 +66,7 @@ ax_d_kwh.tick_params(axis='y',colors=c)
 ax_d_kwh.spines['right'].set_color(c)
 # day plot config:
 title = what
-if time_s: title += f' ({max(kwh_s)} kWh, max. {max(w_s)} W)'
+if w_s: title += f' ({max(kwh_s)} kWh, max. {max(w_s)} W, {len(w_s)} samples)'
 ax_d.set_title(title)
 ax_d.xaxis.set_major_formatter(DateFormatter('%H:%M'))
 if time_s: ax_d.xaxis.set_major_locator(HourLocator())
