@@ -13,7 +13,7 @@ from urllib.request import urlopen
 import json
 import re
 import matplotlib.pyplot as plt
-from matplotlib.dates import (datestr2num,DateFormatter,HourLocator)
+from matplotlib.dates import (datestr2num,DateFormatter)
 from matplotlib.gridspec import GridSpec
 
 # check params:
@@ -69,7 +69,7 @@ title = what
 if w_s: title += f' ({max(kwh_s)} kWh, max. {max(w_s)} W, {len(w_s)} samples)'
 ax_d.set_title(title)
 ax_d.xaxis.set_major_formatter(DateFormatter('%H:%M'))
-if time_s: ax_d.xaxis.set_major_locator(HourLocator())
+if time_s: ax_d.set_xticks([min(time_s),max(time_s)])
 else: ax_d.text(0,0,'(no data)',color='red',va='center',ha='center')
 # combine labels from d and d_kwh into d legend:
 lines_d,labels_d = ax_d.get_legend_handles_labels()
