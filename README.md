@@ -24,6 +24,11 @@ days', the most recent twelve months', and the most recent years' cumulative
 energy will be displayed graphically. Using the date selection control in the 
 top left of the screen, the power curve for any other day can be displayed.
 
+Try moving your mouse pointer over the day curves or their legend, or
+zooming in on that plot for (much) more interactivity! (...with the data
+for your solar system, once you see it in your browser, as described here.
+The example screenshot I provide below is static.)
+
 **Example:**
 
 ![NEPviewerCR+.html](NEPviewerCR+.png)
