@@ -87,7 +87,7 @@ def bar_chart(what,ax):
             x.append(line[0].replace('.','-'))
             y.append(line[1])
             sum += line[1]
-    ax.set_title(f'kWh by {what} (total={sum})')
+    ax.set_title(f'kWh by {what} (total={round(sum,2)})')
     bar = ax.bar(x,y)
     ax.bar_label(bar)
     ax.get_yaxis().set_visible(False)
