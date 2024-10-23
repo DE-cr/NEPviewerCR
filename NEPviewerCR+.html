@@ -95,8 +95,13 @@
           let i = 0;
           for (i=0; i<row.length && !row[i][1]; ++i)
             ;  // skip leading empty data, then process rest
+          let months = ['Jan','Feb','Mar','Apr','May','Jun',
+                        'Jul','Aug','Sep','Oct','Nov','Dec'];
           for (; i<row.length; ++i) {
-            data.push({ 'x': row[i][0].replace(/[/.]/g,'-'), 'y': row[i][1] });
+            let xv = row[i][0].replace(/[/.]/g,'-');
+            if (what=='month')
+              xv = months[xv.substr(5)-1];  // save some display space
+            data.push({ 'x': xv, 'y': row[i][1] });
             sum += row[i][1];
           }
           let graph = c3.generate({
