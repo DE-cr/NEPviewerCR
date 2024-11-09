@@ -31,7 +31,7 @@ The example screenshot I provide below is static.)
 
 **Example:**
 
-![NEPviewerCR+.html](NEPviewerCR+.png)
+![NEPviewerCR+.html](img/NEPviewerCR+.png)
 
 ## NEPviewerCR+.py
 
@@ -43,7 +43,7 @@ also `NEPviewerCR+.py`.
 
 **Example:**
 
-![NEPviewerCR+.py](SN=efcdab78_on_2024-08-12.png)
+![NEPviewerCR+.py](img/SN=efcdab78_on_2024-08-12.png)
 
 ## NEPviewerCR.py
 
@@ -54,13 +54,13 @@ you can also use `NEPviewerCR.py`.
 
 **Example:**
 
-![NEPviewerCR.py](NEPviewerCR.png)
+![NEPviewerCR.py](img/NEPviewerCR.png)
 
 ## NEPstatusCR.pl
 
 There's also `NEPstatusCR.pl`, which can be used on the command line to get the 
-most recent status of a micro inverter registered with the [NEPViewer 
-server](https://nepviewer.com/).
+most recent status of a micro inverter registered with the
+[NEPViewer server](https://nepviewer.com/).
 
 **Example:**
 
@@ -69,3 +69,42 @@ server](https://nepviewer.com/).
 $ perl NEPstatusCR.pl efcdab78
 80 W / 0.048 kWh on 2024-08-20 07:38 (941.257 kWh total)
 ```
+
+## NEPgetCR.pl
+
+`NEPgetCR.pl` can be used to copy your micro inverter's daily output details
+to local `*.json` files (placed in the current directory).
+
+`Usage: perl NEPgetCR.pl serno yyyy-mm-dd`
+
+Here `yyyy-mm-dd` is the day your micro inverter was registered with  the
+[NEPViewer server](https://nepviewer.com/). `NEPgetCR.pl` will not try to
+fetch data from before that date.
+
+Data for the current day will not be fetched, as it may still be incomplete.
+
+## NEPdaysCR.py
+
+`NEPdaysCR.py` plots your micro inverter's daily output progress (energy and
+maximal power readings), using local `*.json` files (see `NEPgetCR.pl` above
+for how to get those).
+
+`Usage: python3 NEPdaysCR.py *.json`
+
+**Example:**
+
+![NEPdaysCR.py](img/NEPdaysCR.png)
+
+## NEPcalendarCR.py
+
+`NEPcalendarCR.py` plots your micro inverter's daily output in a calendar format,
+using local `*.json` files (see `NEPgetCR.pl` above for how to get those).
+
+To use a common scale for each month's data, the maximal kWh/d are set to 5.
+This can easily be adjusted in `NEPcalendarCR.py` if necessary.
+
+`Usage: python3 NEPcalendarCR.py *.json`
+
+**Example:**
+
+![NEPcalendarCR.py](img/2024.png)

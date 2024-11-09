@@ -30,7 +30,7 @@ what = f'SN={serno} on {date[0:4]}-{date[4:6]}-{date[6:]}'
 base_url = 'http://user.nepviewer.com/pv_monitor/proxy/'
 
 # load day data:
-url = f'{base_url }history/{serno}/{date}/{date}/0/1/2'
+url = f'{base_url}history/{serno}/{date}/{date}/0/1/2'
 data = json.loads(urlopen(url).read())['data']
 time_s,w_s,kwh_s = [],[],[]
 if data:
