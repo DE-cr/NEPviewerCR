@@ -6,12 +6,14 @@
 #   photovoltaic micro inverter registered with their site
 # - usage: python3 NEPcalendarCR.py *.json
 
+colorful = False  # set to True for green-to-red color coded energy bars
+max_kwh_per_day = 5  # adjust, if necessary
+
 import json
 from sys import argv
 
 import matplotlib.pyplot as plt
-
-max_kwh_per_day = 5  # adjust, if necessary
+from matplotlib.colors import hsv_to_rgb
 
 month = [
     "January",
@@ -36,7 +38,13 @@ def plot_month(ax, m, kwh):
             kwh[d] = 0
     total = int(sum(kwh.values()))
     high = f"(max/d={max(kwh.values()):.1f})"
-    ax.bar(kwh.keys(), kwh.values())
+    if colorful:
+        color = []
+        for d in kwh:  # hue: max:0=red to min:1/3=green
+            color.append(hsv_to_rgb(((1 - kwh[d] / max_kwh_per_day) / 3, 1, 1)))
+        ax.bar(kwh.keys(), kwh.values(), color=color)
+    else:
+        ax.bar(kwh.keys(), kwh.values())
     ax.set_ylim(0, max_kwh_per_day)
     ax.set_title(f"{month[m-1]}: {total:.0f} kWh {high}", y=-0.11)
     return total

@@ -108,3 +108,10 @@ This can easily be adjusted in `NEPcalendarCR.py` if necessary.
 **Example:**
 
 ![NEPcalendarCR.py](img/2024.png)
+
+Should you prefer to have the energy bars colored similar to the original
+NepViewer's Watt meter, set `colorful = True` in `NEPcalendarCR.py`.
+
+**Example:**
+
+![NEPcalendarCR.py colorful](img/2024c.png)
