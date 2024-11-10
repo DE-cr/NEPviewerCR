@@ -59,7 +59,9 @@ def plot_calendar(y, kwh):
     fig.suptitle(f"{y}: {total:.0f} kWh", fontweight="bold")
     for a in ax.ravel():
         a.set_axis_off()
-    plt.savefig(f"{y}.png")
+    fn = f"{y}.png"
+    print("Writing", fn, "...")
+    plt.savefig(fn)
 
 
 # load data:
