@@ -7,7 +7,6 @@
 # - usage: python3 NEPcalendarCR.py *.json
 
 colorful = False  # set to True for green-to-red color coded energy bars
-max_kwh_per_day = 5  # adjust, if necessary
 
 import json
 from sys import argv
@@ -66,6 +65,7 @@ def plot_calendar(y, kwh):
 
 # load data:
 kwh = {}
+max_kwh_per_day = 0
 for fn in argv[1:]:
     with open(fn, "r") as file:
         d = json.load(file)["data"]
@@ -80,6 +80,8 @@ for fn in argv[1:]:
         if not m in kwh[y]:
             kwh[y][m] = {}
         kwh[y][m][d] = k
+        if k > max_kwh_per_day:
+            max_kwh_per_day = k
 
 # plot data:
 for y in kwh:

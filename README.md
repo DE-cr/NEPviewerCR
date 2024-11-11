@@ -100,9 +100,6 @@ for how to get those).
 `NEPcalendarCR.py` plots your micro inverter's daily output in a calendar format,
 using local `*.json` files (see `NEPgetCR.pl` above for how to get those).
 
-To use a common scale for each month's data, the maximal kWh/d are set to 5.
-This can easily be adjusted in `NEPcalendarCR.py` if necessary.
-
 `Usage: python3 NEPcalendarCR.py *.json`
 
 **Example:**
