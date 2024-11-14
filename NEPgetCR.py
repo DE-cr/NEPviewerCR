@@ -25,12 +25,12 @@ current_date = datetime.now()
 while True:
     current_date -= timedelta(days=1)
     ymd = current_date.strftime("%Y-%m-%d")
-    print(f"{ymd} ... ", end="")
-    fn = f"{sn}_{ymd}.json"
 
+    fn = f"{sn}_{ymd}.json"
     if os.path.isfile(fn):
         break
 
+    print(f"{ymd} ... ", end="")
     ymd_no_dash = ymd.replace("-", "")
     url = f"https://user.nepviewer.com/pv_monitor/proxy/history/{sn}/{ymd_no_dash}/{ymd_no_dash}/0/1/2"
 
