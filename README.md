@@ -39,7 +39,7 @@ If a static snapshot of your solar system's performance is sufficient for you
 (or you're not willing to (temporarily) disable CORS in your browser), there's 
 also `NEPviewerCR+.py`.
 
-`Usage: python3 NEPviewerCR+.py serno [yyyymmdd]`
+`Usage: python NEPviewerCR+.py serno [yyyymmdd]`
 
 **Example:**
 
@@ -50,15 +50,15 @@ also `NEPviewerCR+.py`.
 If all you want is a non-interactive plot of a day's power and energy curves, 
 you can also use `NEPviewerCR.py`.
 
-`Usage: python3 NEPviewerCR.py serno [yyyymmdd]`
+`Usage: python NEPviewerCR.py serno [yyyymmdd]`
 
 **Example:**
 
 ![NEPviewerCR.py](img/NEPviewerCR.png)
 
-## NEPstatusCR.pl
+## NEPstatusCR.py
 
-There's also `NEPstatusCR.pl`, which can be used on the command line to get the 
+There's also `NEPstatusCR.py`, which can be used on the command line to get the 
 most recent status of a micro inverter registered with the
 [NEPViewer server](https://nepviewer.com/).
 
@@ -66,30 +66,26 @@ most recent status of a micro inverter registered with the
 
 (Replace `efcdab78` with your micro inverter's serial number!)
 ```
-$ perl NEPstatusCR.pl efcdab78
+$ python NEPstatusCR.py efcdab78
 80 W / 0.048 kWh on 2024-08-20 07:38 (941.257 kWh total)
 ```
 
-## NEPgetCR.pl
+## NEPgetCR.py
 
-`NEPgetCR.pl` can be used to copy your micro inverter's daily output details
+`NEPgetCR.py` can be used to copy your micro inverter's daily output details
 to local `*.json` files (placed in the current directory).
 
-`Usage: perl NEPgetCR.pl serno yyyy-mm-dd`
-
-Here `yyyy-mm-dd` is the day your micro inverter was registered with  the
-[NEPViewer server](https://nepviewer.com/). `NEPgetCR.pl` will not try to
-fetch data from before that date.
+`Usage: python NEPgetCR.py serno
 
 Data for the current day will not be fetched, as it may still be incomplete.
 
 ## NEPdaysCR.py
 
 `NEPdaysCR.py` plots your micro inverter's daily output progress (energy and
-maximal power readings), using local `*.json` files (see `NEPgetCR.pl` above
+maximal power readings), using local `*.json` files (see `NEPgetCR.py` above
 for how to get those).
 
-`Usage: python3 NEPdaysCR.py *.json`
+`Usage: python NEPdaysCR.py *.json`
 
 **Example:**
 
@@ -97,10 +93,11 @@ for how to get those).
 
 ## NEPcalendarCR.py
 
-`NEPcalendarCR.py` plots your micro inverter's daily output in a calendar format,
-using local `*.json` files (see `NEPgetCR.pl` above for how to get those).
+`NEPcalendarCR.py` plots your micro inverter's daily output in a calendar
+format, using local `*.json` files (see `NEPgetCR.py` above for how to get
+those).
 
-`Usage: python3 NEPcalendarCR.py *.json`
+`Usage: python NEPcalendarCR.py *.json`
 
 **Example:**
 
@@ -112,3 +109,23 @@ NepViewer's Watt meter, set `colorful = True` in `NEPcalendarCR.py`.
 **Example:**
 
 ![NEPcalendarCR.py colorful](img/2024c.png)
+
+## NEPjson2csvCR.py
+
+`NEPjson2csvCR.py` compiles data from local `*.json` files (see `NEPgetCR.py`
+above for how to get those) into a `*.csv` file for use in spreadsheet
+applications e.g.
+
+`Usage: python NEPjson2csvCR.py *.json`
+
+## NEPpowertempCR.py
+
+`NEPpowertempCR.py` uses data from a local `*.csv` (see `NEPjson2csvCR.py`
+above) to create a comprehensive view of all (?) of your micro inverter's
+interesting data, plotting power readings and mean system temperatures
+over time of day in a calendar format, as well as providing cumulative
+energy output values.
+
+**Example:**
+
+![NEPviewerCR+.py](img/NEPviewerCR_efcdab78.png)

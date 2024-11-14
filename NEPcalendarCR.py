@@ -9,6 +9,7 @@
 colorful = False  # set to True for green-to-red color coded energy bars
 
 import json
+import re
 from sys import argv
 
 import matplotlib.pyplot as plt
@@ -49,7 +50,7 @@ def plot_month(ax, m, kwh):
     return total
 
 
-def plot_calendar(y, kwh):
+def plot_calendar(sn, y, kwh):
     cols, rows = 3, 4
     fig, ax = plt.subplots(rows, cols, figsize=(10, 10), layout="constrained")
     total = 0
@@ -58,7 +59,7 @@ def plot_calendar(y, kwh):
     fig.suptitle(f"{y}: {total:.0f} kWh", fontweight="bold")
     for a in ax.ravel():
         a.set_axis_off()
-    fn = f"{y}.png"
+    fn = f"NEPviewerCR_{sn}_{y}.png"
     print("Writing", fn, "...")
     plt.savefig(fn)
 
@@ -67,6 +68,9 @@ def plot_calendar(y, kwh):
 kwh = {}
 max_kwh_per_day = 0
 for fn in argv[1:]:
+    # try to find serial number in file name given:
+    sn = re.search("[0-9a-f]{8}", argv[1])
+    sn = sn.group() if sn else "unknown"
     with open(fn, "r") as file:
         d = json.load(file)["data"]
         if not d:
@@ -75,14 +79,17 @@ for fn in argv[1:]:
         f = d[-1].split()  # day's total is in last row
         y, m, d = [int(x) for x in f[0].split("-")]
         k = float(f[8])
-        if not y in kwh:
-            kwh[y] = {}
-        if not m in kwh[y]:
-            kwh[y][m] = {}
-        kwh[y][m][d] = k
+        if not sn in kwh:
+            kwh[sn] = {}
+        if not y in kwh[sn]:
+            kwh[sn][y] = {}
+        if not m in kwh[sn][y]:
+            kwh[sn][y][m] = {}
+        kwh[sn][y][m][d] = k
         if k > max_kwh_per_day:
             max_kwh_per_day = k
 
 # plot data:
-for y in kwh:
-    plot_calendar(y, kwh[y])
+for sn in kwh:
+    for y in kwh[sn]:
+        plot_calendar(sn, y, kwh[sn][y])
