@@ -43,13 +43,14 @@ for line in data:
         kwh_s.append(float(kwh))
 
 # do plot:
-color_s = [ 'blue', 'orange' ]
+color_s = plt.rcParams['axes.prop_cycle'].by_key()['color']
 fig,ax1 = plt.subplots()
 ax2 = ax1.twinx()
-ax1.plot(time_s,w_s  ,marker='.',color=color_s[0])
-ax2.plot(time_s,kwh_s,marker='.',color=color_s[1])
+ax1.plot(time_s,w_s  ,marker='.',color=color_s[0],lw=1)
+ax2.plot(time_s,kwh_s,marker='.',color=color_s[1],lw=1)
 ax1.set_ylabel('Power [W]'   ,color=color_s[0])
 ax2.set_ylabel('Energy [kWh]',color=color_s[1])
 plt.gca().xaxis.set_major_formatter(DateFormatter('%H:%M'))
+plt.xticks([min(time_s),max(time_s)])
 plt.title(what)
 plt.show()
