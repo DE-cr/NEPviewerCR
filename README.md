@@ -126,6 +126,8 @@ interesting data, plotting power readings and mean system temperatures
 over time of day in a calendar format, as well as providing cumulative
 energy output values.
 
+`Usage: python NEPpowertempCR.py *.csv`
+
 **Example:**
 
 ![NEPviewerCR+.py](img/NEPviewerCR_efcdab78.png)
