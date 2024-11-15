@@ -50,18 +50,19 @@ ax_w = fig.add_subplot(gs[0,1],frameon=False)
 ax_m = fig.add_subplot(gs[1,1],frameon=False)
 ax_y = fig.add_subplot(gs[2,1],frameon=False)
 ax_d_kwh = ax_d.twinx()
+colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
 def no_data(ax):
     ax.text(0,0,'(no data)',color='red',va='center',ha='center')
 
 # day power:
-c = 'blue'
-ax_d.plot(time_s,w_s,label='Power [W]',marker='.',color=c)
+c = colors[0]
+ax_d.plot(time_s,w_s,label='Power [W]',marker='.',color=c,lw=1)
 ax_d.tick_params(axis='y',colors=c)
 ax_d_kwh.spines['left'].set_color(c)
 # day energy:
-c = 'orange'
-ax_d_kwh.plot(time_s,kwh_s,label='Energy [kWh]',marker='.',color=c)
+c = colors[1]
+ax_d_kwh.plot(time_s,kwh_s,label='Energy [kWh]',marker='.',color=c,lw=1)
 ax_d_kwh.tick_params(axis='y',colors=c)
 ax_d_kwh.spines['right'].set_color(c)
 # day plot config:
