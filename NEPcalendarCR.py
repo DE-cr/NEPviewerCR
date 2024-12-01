@@ -36,7 +36,7 @@ def plot_month(ax, m, kwh):
     for d in range(1, 32):
         if not d in kwh:
             kwh[d] = 0
-    total = int(sum(kwh.values()))
+    total = round(sum(kwh.values()))
     high = f"(max/d={max(kwh.values()):.1f})"
     if colorful:
         color = []
