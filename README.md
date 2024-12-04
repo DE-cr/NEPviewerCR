@@ -29,6 +29,9 @@ zooming in on that plot for (much) more interactivity! (...with the data
 for your solar system, once you see it in your browser, as described here.
 The example screenshot I provide below is static.)
 
+Note: In the monthly bars, each complete (!) month's day's output is missing.
+This is exactly as in the original NEPviewer app.
+
 **Example:**
 
 ![NEPviewerCR+.html](img/NEPviewerCR+.png)
@@ -75,7 +78,7 @@ $ python NEPstatusCR.py efcdab78
 `NEPgetCR.py` can be used to copy your micro inverter's daily output details
 to local `*.json` files (placed in the current directory).
 
-`Usage: python NEPgetCR.py serno
+`Usage: python NEPgetCR.py serno`
 
 Data for the current day will not be fetched, as it may still be incomplete.
 
