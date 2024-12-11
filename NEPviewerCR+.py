@@ -36,8 +36,8 @@ time_s,w_s,kwh_s = [],[],[]
 if data:
     for line in data:
         f = line.split()
-        if len(f) == 12:
-            date,time,kw,dc,ac,x1,hz,c,kwh,x2,s1,s2 = f
+        if len(f) >= 9:
+            date,time,kw,dc,ac,x1,hz,c,kwh = f[:9]
             time_s.append(datestr2num(time))
             w_s.append(int(float(kw)*1000))
             kwh_s.append(float(kwh))

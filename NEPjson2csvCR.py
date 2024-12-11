@@ -26,7 +26,7 @@ for fn in argv[1:]:
             continue
         for row in d:
             f = row.split()
-            if len(f) == 12:  # only log complete rows
+            if len(f) >= 12:  # only log complete rows
                 data.append(f)
 
 # output:
@@ -46,6 +46,7 @@ if data:
             "ratio",  # ?
             "ver",  # ?
             "status",
+            "new",  # ?
         ],
     )
     df.to_csv(csv_fn, index=False)
