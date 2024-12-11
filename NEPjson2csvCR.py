@@ -25,14 +25,14 @@ for fn in argv[1:]:
         if not d:  # skip empty files
             continue
         for row in d:
-            f = row.split()
-            if len(f) >= 12:  # only log complete rows
+            f = row.split(' ')
+            if len(f) == 13:  # only log complete rows
                 data.append(f)
 
 # output:
 if data:
-    df_old = pd.DataFrame(
-        [row for row in data if len(row)==12],
+    df = pd.DataFrame(
+        data,
         columns=[
             "date",
             "time",
@@ -43,30 +43,11 @@ if data:
             "Hz",
             "temperature",
             "kWh",
-            "ratio",  # ?
-            "ver",  # ?
-            "status",
-        ],
-    )
-    # new json contents, as of 2024-10-08:
-    df_new = pd.DataFrame(
-        [row for row in data if len(row)==13],
-        columns=[
-            "date",
-            "time",
-            "kW",
-            "V_dc",  # ?
-            "V_ac",
-            "eng_offset",  # ?
-            "Hz",
-            "temperature",
-            "kWh",
-            "ratio",  # ?
             "unknown_1",  # ?
+            "ratio",  # ?
             "status",
             "unknown_2",  # ?
         ],
     )
-    df = pd.concat([df_old,df_new])
     df.to_csv(csv_fn, index=False)
     print(f"Wrote {len(df)} rows of data to file {csv_fn}")
