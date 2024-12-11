@@ -42,7 +42,7 @@ while True:
     with open(fn, 'wb') as file:
         file.write(response.content)
 
-    if os.path.getsize(fn) == 38:
+    if os.path.getsize(fn) < 40:
         print("empty")
         empty_files.append(fn)
     else:
