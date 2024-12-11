@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # NEPviewerCR (https://github.com/DE-cr/NEPviewerCR)
 # (file NEPjson2csvCR.py: build *.csv from nepviewer.com *.json data)
@@ -31,8 +31,8 @@ for fn in argv[1:]:
 
 # output:
 if data:
-    df = pd.DataFrame(
-        data,
+    df_old = pd.DataFrame(
+        [row for row in data if len(row)==12],
         columns=[
             "date",
             "time",
@@ -46,8 +46,27 @@ if data:
             "ratio",  # ?
             "ver",  # ?
             "status",
-            "new",  # ?
         ],
     )
+    # new json contents, as of 2024-10-08:
+    df_new = pd.DataFrame(
+        [row for row in data if len(row)==13],
+        columns=[
+            "date",
+            "time",
+            "kW",
+            "V_dc",  # ?
+            "V_ac",
+            "eng_offset",  # ?
+            "Hz",
+            "temperature",
+            "kWh",
+            "ratio",  # ?
+            "unknown_1",  # ?
+            "status",
+            "unknown_2",  # ?
+        ],
+    )
+    df = pd.concat([df_old,df_new])
     df.to_csv(csv_fn, index=False)
     print(f"Wrote {len(df)} rows of data to file {csv_fn}")
