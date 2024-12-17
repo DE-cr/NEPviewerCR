@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 max_empty = 1  # more consecutive days without data? => stop program
 
 if len(sys.argv) != 2 or not sys.argv[1].isalnum() or len(sys.argv[1]) != 8:
-    raise SystemExit("Usage: script.py serno")
+    raise SystemExit(f"Usage: {argv[0]} serno")
 
 sn = sys.argv[1]
 
