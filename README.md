@@ -1,7 +1,3 @@
-*Note: Due to recent (2025-01-21) changes at nepviewer.com most of the files here
-(the ones that fetch data from their servers) currently don't work anymore.*
----
-
 # NEPviewerCR
 
 **(Partial) NEPViewer replacement for desktop/laptop computers**

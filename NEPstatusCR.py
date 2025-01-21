@@ -13,7 +13,7 @@ import sys
 import requests
 
 for sn in sys.argv[1:]:
-    data = requests.get(f"http://user.nepviewer.com/pv_monitor/proxy/status/{sn}/0/2/").text
+    data = requests.get(f"http://user2.nepviewer.com/pv_monitor/proxy/status/{sn}/0/2/").text
     match = re.search(r'"LastUpDate":"([^"]+).*"now":(\d+).*"today":(\d+).*"total_status":(\d+)', data)
     if match:
         last_update, now, today, total_status = match.groups()

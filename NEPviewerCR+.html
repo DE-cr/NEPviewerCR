@@ -44,7 +44,7 @@
       bar_chart('year');
       function show_day() {
         let sdate = date.value.replace(/-/g,'');
-        fetch('http://user.nepviewer.com/pv_monitor/proxy/history/'+SN+'/'+sdate+'/'+sdate+'/0/1/2')
+        fetch('http://user2.nepviewer.com/pv_monitor/proxy/history/'+SN+'/'+sdate+'/'+sdate+'/0/1/2')
         .then(response => response.json())
         .then(json => {
           // sample data:
@@ -84,7 +84,7 @@
         });
       }
       function bar_chart(what) {  // what=week/month/year
-        fetch('http://user.nepviewer.com/pv_monitor/proxy/'+what+'/'+SN+'/0/2/')
+        fetch('http://user2.nepviewer.com/pv_monitor/proxy/'+what+'/'+SN+'/0/2/')
         .then(response => response.json())
         .then(json => {
           // sample data:

@@ -26,7 +26,7 @@ else: raise SystemExit(f'Usage: {argv[0]} serno [yyyymmdd]')
 
 # load data:
 what = f'{serno} on {date}'
-url = 'http://user.nepviewer.com/pv_monitor/proxy/' \
+url = 'http://user2.nepviewer.com/pv_monitor/proxy/' \
     + f'history/{serno}/{date}/{date}/0/1/2'
 data = json.loads(urllib.request.urlopen(url).read())['data']
 if not data: raise SystemExit(f'No data available for {what}')

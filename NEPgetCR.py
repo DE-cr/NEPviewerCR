@@ -32,7 +32,7 @@ while True:
 
     print(f"{ymd} ... ", end="")
     ymd_no_dash = ymd.replace("-", "")
-    url = f"https://user.nepviewer.com/pv_monitor/proxy/history/{sn}/{ymd_no_dash}/{ymd_no_dash}/0/1/2"
+    url = f"https://user2.nepviewer.com/pv_monitor/proxy/history/{sn}/{ymd_no_dash}/{ymd_no_dash}/0/1/2"
 
     response = requests.get(url)
     if response.status_code != 200:

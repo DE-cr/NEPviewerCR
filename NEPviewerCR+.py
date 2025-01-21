@@ -27,7 +27,7 @@ else: raise SystemExit(f'Usage: {argv[0]} serno [yyyymmdd]')
 
 print('Fetching data...')
 what = f'SN={serno} on {date[0:4]}-{date[4:6]}-{date[6:]}'
-base_url = 'http://user.nepviewer.com/pv_monitor/proxy/'
+base_url = 'http://user2.nepviewer.com/pv_monitor/proxy/'
 
 # load day data:
 url = f'{base_url}history/{serno}/{date}/{date}/0/1/2'
