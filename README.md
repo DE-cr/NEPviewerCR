@@ -55,6 +55,9 @@ you can also use `NEPviewerCR.py`.
 
 `Usage: python NEPviewerCR.py serno [yyyymmdd]`
 
+This uses smoothened curves by default. If you prefer jagged curves, as in the
+other tools, set `smooth = False` in the source code.
+
 **Example:**
 
 ![NEPviewerCR.py](img/NEPviewerCR.png)
