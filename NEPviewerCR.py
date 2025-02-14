@@ -20,7 +20,7 @@ from scipy.interpolate import make_interp_spline
 smooth = True  # set to False for jagged curves
 
 def smoothen(x,y,k=3,n=1000):
-    if not smooth: return x,y
+    if not smooth or len(x)<3: return x,y
     spline = make_interp_spline(x,y,k=k)
     x_smooth = np.linspace(x[0],x[-1],n)
     y_smooth = spline(x_smooth)
