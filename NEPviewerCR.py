@@ -19,8 +19,17 @@ from scipy.interpolate import make_interp_spline
 
 smooth = True  # set to False for jagged curves
 
-def smoothen(x,y,k=3,n=1000):
-    if not smooth or len(x)<3: return x,y
+def smoothen(x_in,y_in,k=3,n=1000):
+    if not smooth: return x_in,y_in
+    # remove duplicate values, if any:
+    x,y = [],[]
+    x_prev = 0
+    for x_now,y_now in zip(x_in,y_in):
+        if x_now != x_prev:
+            x.append(x_now)
+            y.append(y_now)
+            x_prev = x_now
+    if len(x)<3: return x_in,y_in  # not enough data?
     spline = make_interp_spline(x,y,k=k)
     x_smooth = np.linspace(x[0],x[-1],n)
     y_smooth = spline(x_smooth)
