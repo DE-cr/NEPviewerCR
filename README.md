@@ -29,7 +29,7 @@ zooming in on that plot for (much) more interactivity! (...with the data
 for your solar system, once you see it in your browser, as described here.
 The example screenshot I provide below is static.)
 
-Note: In the monthly bars, each complete (!) month's day's output is missing.
+Note: In the monthly bars, each complete (!) month's last day's output is missing.
 This is exactly as in the original NEPviewer app.
 
 **Example:**
