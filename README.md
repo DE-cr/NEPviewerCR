@@ -1,3 +1,5 @@
+**_Note 2025-04-21: As of today, the nepviewer.com access used by these scripts has been blocked (403 Forbidden)!_**
+
 # NEPviewerCR
 
 **(Partial) NEPViewer replacement for desktop/laptop computers**
