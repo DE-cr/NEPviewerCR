@@ -14,7 +14,7 @@ import requests
 
 for sn in sys.argv[1:]:
     data = requests.get(f"http://user2.nepviewer.com/pv_monitor/proxy/status/{sn}/0/2/").text
-    match = re.search(r'"LastUpDate":"([^"]+).*"now":(\d+).*"today":(\d+).*"total_status":(\d+)', data)
+    match = re.search(r'"LastUpDate":"([^"]+).*"now":(\d+).*"total_status":(\d+).*"today\\":(\d+)', data)
     if match:
-        last_update, now, today, total_status = match.groups()
+        last_update, now, total_status, today = match.groups()
         print(f"{int(now)} W / {int(today) / 1000} kWh on {last_update} ({int(total_status) / 1000} kWh total)")
