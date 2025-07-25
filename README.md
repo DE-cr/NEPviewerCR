@@ -1,5 +1,9 @@
 **_Note 2025-04-21: As of today, the nepviewer.com access used by these scripts has been blocked (403 Forbidden)!_**
 
+_P.S. 2025-07-25: If you want to roll your own scripts accessing the current NEP API, https://community.home-assistant.io/t/microinverter-integration-nuasol-northern-electric/591399/19 should get you started._
+
+---
+
 # NEPviewerCR
 
 **(Partial) NEPViewer replacement for desktop/laptop computers**
