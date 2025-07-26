@@ -9,7 +9,7 @@ set of tools to access and display my micro inverters data stored with NEP.
 
 Since then, the site (and the Android app) have improved, so that they
 probably fulfill most users' needs. When NEP changed the API I had used
-in my tool set in April 2025, I abandoned my tools and restricted myself
+in my tool set until April 2025, I abandoned my tools and restricted myself
 to using NEP's official offering (NEPViewer web site and app).[^1]
 
 [^1]: ...especially
