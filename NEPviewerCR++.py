@@ -70,10 +70,17 @@ last_day = dmy2ymd(data["lastUpdate"])[:10]
 
 print(
     f'Reading data for {data["modelName"]} #{data["sn"]}',
-    f'registered {dmy2ymd(data["createdAt"])} in {data["city"]}:',
+    f'registered {dmy2ymd(data["createdAt"])} in {data["city"]}',
 )
+
+
+## show device status
+
+data = get_data("device/statistics/overview", {"sn": sn})
+
 print(
-    f'Last update: {data["now"]} {data["nowUnit"]}',
+    f'Last update: {data["totalNow"]} {data["totalNowUnit"]}',
+    f'/ {data["production"]["today"]} {data["production"]["todayUnit"]}',
     f'at {dmy2ymd(data["lastUpdate"])}, status {data["alertTitle"]}',
 )
 
