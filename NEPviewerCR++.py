@@ -128,16 +128,24 @@ for y in range(y1, y2 + 1):
             continue
         dd1 = d1 if y == y1 and m == m1 else 1
         dd2 = d2 if y == y2 and m == m2 else calendar.monthrange(y, m)[1]
+        # NEP server doesn't handle rangeDate of a single day correctly:
+        if first_day == last_day:
+            if dd1 == 1:
+                dd2 = dd2 + 1
+            else:
+                dd1 = dd1 - 1
         rd = f"{y}-{m:02d}-{dd1:02d}~{y}-{m:02d}-{dd2:02d}"
         print("Getting data for", rd, "from NEP server")
         data = get_data(
             "device/statistics/echarts", {"sn": sn, "types": 3, "rangeDate": rd}
         )
-        for i, x in enumerate(data["series"][0]["data"]):
-            if x == None:
-                continue
-            date.append(dmy2ymd(data["xAxisData"][i]))
-            kwh.append(x)
+        for i, k in enumerate(data["series"][0]["data"]):
+            d = dmy2ymd(data["xAxisData"][i])
+            if debug:
+                print(d, k)
+            if k != None:
+                date.append(d)
+                kwh.append(k)
 
 # append newly fetched data to old data loaded from file:
 df = pd.concat([df, pd.DataFrame({"date": date, "kWh": kwh})])
