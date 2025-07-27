@@ -18,7 +18,8 @@ after realizing that NEP now fakes Watt readings in their "minute" plots:
 Instead of showing when it received what power reading from the micro
 inverters (which could be up to every five minutes, or not at all for longer
 periods of time), they pretend to receive a new value every fifteen minutes,
-with the power value being somehow interpolated.
+with the power value being somehow interpolated. The "last update" values
+(timestamp and power) readable from the NEP server are still okay, though.
 
 ...but then I wanted some changes/additions:
 

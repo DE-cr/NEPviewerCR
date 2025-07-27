@@ -68,6 +68,15 @@ sn = data["sn"]
 first_day = dmy2ymd(data["createdAt"])[:10]
 last_day = dmy2ymd(data["lastUpdate"])[:10]
 
+print(
+    f'Reading data for {data["modelName"]} #{data["sn"]}',
+    f'registered {dmy2ymd(data["createdAt"])} in {data["city"]}:',
+)
+print(
+    f'Last update: {data["now"]} {data["nowUnit"]}',
+    f'at {dmy2ymd(data["lastUpdate"])}, status {data["alertTitle"]}',
+)
+
 
 ## (try to) load old data from local file
 
@@ -105,7 +114,7 @@ for y in range(y1, y2 + 1):
         dd1 = d1 if y == y1 and m == m1 else 1
         dd2 = d2 if y == y2 and m == m2 else calendar.monthrange(y, m)[1]
         rd = f"{y}-{m:02d}-{dd1:02d}~{y}-{m:02d}-{dd2:02d}"
-        print("Getting data for", rd, "from NEP server...")
+        print("Getting data for", rd, "from NEP server")
         data = get_data(
             "device/statistics/echarts", {"sn": sn, "types": 3, "rangeDate": rd}
         )
