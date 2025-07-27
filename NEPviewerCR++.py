@@ -113,7 +113,7 @@ if len(df):
     first_day = df.date.max()
 
 
-## get all day's kWh
+## get all days' kWh
 
 y1, m1, d1 = [int(x) for x in first_day.split("-")]
 y2, m2, d2 = [int(x) for x in last_day.split("-")]
