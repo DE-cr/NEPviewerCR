@@ -49,6 +49,14 @@ def dmy2ymd(x):
     return f"{x[6:10]}-{x[3:5]}-{x[0:2]}{x[10:]}"
 
 
+def do_plot():
+    plt.tight_layout()
+    if png:
+        plt.savefig("month.png")
+    else:
+        plt.show()
+
+
 ## get authorization
 
 headers["Authorization"] = get_data(
@@ -152,11 +160,7 @@ df["day"] = df.date.dt.day
 
 # plot kWh/d:
 df.plot(x="date", y="kWh", grid=True, figsize=(15, 5))
-plt.tight_layout()
-if png:
-    plt.savefig("day.png")
-else:
-    plt.show()
+do_plot()
 
 # plot kWh/month:
 kWh_m = df.groupby(["year", "month"]).kWh.sum().reset_index()
@@ -175,30 +179,20 @@ ax.legend(
     ]
 )
 ax.set_title(f"Overall Energy Production: {kWh_m.kWh.sum():.0f} kWh", weight="bold")
-plt.tight_layout()
-if png:
-    plt.savefig("month.png")
-else:
-    plt.show()
+do_plot()
 
 # boxplot for kWh/d, grouped by year,month:
-df.boxplot("kWh", ["year", "month"], rot=90, showmeans=True, figsize=(10, 5))
-plt.tight_layout()
-if png:
-    plt.savefig("boxplot.png")
-else:
-    plt.show()
+dfx = df.query(f'date<"{last_day}"')
+# usually incomplete last (current) day distorts box for current month
+dfx.boxplot("kWh", ["year", "month"], rot=90, showmeans=True, figsize=(10, 5))
+do_plot()
 
 # plot highest kWh/d:
 n = 30
 df.groupby("sdate").max().nlargest(n, "kWh").plot.scatter(
     "date", "kWh", grid=True, rot=90, title=f"{n} Highest Daily Energies", alpha=0.5
 )
-plt.tight_layout()
-if png:
-    plt.savefig("top.png")
-else:
-    plt.show()
+do_plot()
 
 
 ## plot calendars:
