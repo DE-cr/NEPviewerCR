@@ -139,8 +139,8 @@ for y in range(y1, y2 + 1):
         data = get_data(
             "device/statistics/echarts", {"sn": sn, "types": 3, "rangeDate": rd}
         )
-        for i, k in enumerate(data["series"][0]["data"]):
-            d = dmy2ymd(data["xAxisData"][i])
+        for d, k in zip(data["xAxisData"], data["series"][0]["data"]):
+            d = dmy2ymd(d)
             if debug:
                 print(d, k)
             if k != None:
