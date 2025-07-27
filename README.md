@@ -4,7 +4,8 @@
 
 Before 2025 (?), [nepviewer.com](https://nepviewer.com)
 didn't show most of the data it had received from
-NEP micro inverters registered with the site. This led me to creating my own
+NEP micro inverters (including those re-branded by Anker or NuaSol, e.g.)
+registered with the site. This led me to creating my own
 set of tools to access and display my micro inverter's data stored with NEP.
 
 Since then, the site (and the Android app) have improved, so that they
