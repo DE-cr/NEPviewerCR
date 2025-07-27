@@ -40,7 +40,7 @@ Sadly, NEP doesn't provide older data with its current API, but in case
 you had been using `NEPgetCR.py` and `NEPjson2csvCR.py` from
 [v2_obsolete](v2_obsolete)
 before the NEP API change, `NEPviewerCR++.py` will initially load the
-resulting `*.csv` before asking the NEP server for data.
+resulting `*.csv` before asking the NEP server for newer data.
 
 To use `NEPviewerCR++.py`, you must provide it with your credentials for
 `nepviewer.com` in environment variables, e.g.
