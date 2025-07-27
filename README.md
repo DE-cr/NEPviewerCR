@@ -2,10 +2,10 @@
 
 **NEPViewer supplement for desktop/laptop computers**
 
-Before 2025, [nepviewer.com](https://nepviewer.com)
+Before 2025 (?), [nepviewer.com](https://nepviewer.com)
 didn't show most of the data it had received from
 NEP micro inverters registered with the site. This led me to creating my own
-set of tools to access and display my micro inverters data stored with NEP.
+set of tools to access and display my micro inverter's data stored with NEP.
 
 Since then, the site (and the Android app) have improved, so that they
 probably fulfill most users' needs. When NEP changed the API I had used
@@ -23,7 +23,8 @@ with the power value being somehow interpolated.
 
 * correct figures for monthly production (in already completed months,
   NEP omits the last day)
-* more condensed overviews of my PV system's performance (see examples below)
+* more condensed overviews of my PV system's overall performance
+  (see examples below)
 
 This is why I created...
 
