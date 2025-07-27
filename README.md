@@ -25,7 +25,7 @@ with the power value being somehow interpolated. The "last update" values
 
 * correct figures for monthly production (in already completed months,
   NEP omits the last day)
-* more condensed overviews of my PV system's overall performance
+* more informative overviews of my PV system's overall performance
   (see examples below)
 
 This is why I created...
@@ -39,8 +39,8 @@ plots of the data.
 
 Sadly, NEP doesn't provide older data with its current API, but in case
 you had been using `NEPgetCR.py` and `NEPjson2csvCR.py` from
-[v2_obsolete](v2_obsolete)
-before the NEP API change, `NEPviewerCR++.py` will initially load the
+[v2_obsolete](v2_obsolete) before the April 2025 NEP API change,
+`NEPviewerCR++.py` will initially load the
 resulting `*.csv` before asking the NEP server for newer data.
 
 To use `NEPviewerCR++.py`, you must provide it with your credentials for
