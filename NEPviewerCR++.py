@@ -6,22 +6,12 @@
 # (file NEPviewerCR++.py: get kWh/d values from NEP server and provide some plots)
 
 
-## configuration
-
-debug = False
-png = False
-
-
-## initialization
-
 import os
 import requests
-import json
 import calendar
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import hsv_to_rgb
-from pprint import pprint
 
 # read NEP account info from environment:
 account = os.environ["NEP_ACCOUNT"]
@@ -34,12 +24,7 @@ headers = {"oem": "NEP"}
 
 def get_data(path, data):
     response = requests.post(f"{base_url}/{path}", headers=headers, json=data)
-    if debug:
-        print(response)
-    d = response.json()["data"]
-    if debug:
-        pprint(d)
-    return d
+    return response.json()["data"]
 
 
 def dmy2ymd(x):
@@ -47,14 +32,6 @@ def dmy2ymd(x):
     # (DD/MM/YYYY is the date format I get when reading from the NEP server;
     #  this may need adapting for other NEP accounts, depending on their settings)
     return f"{x[6:10]}-{x[3:5]}-{x[0:2]}{x[10:]}"
-
-
-def do_plot():
-    plt.tight_layout()
-    if png:
-        plt.savefig("month.png")
-    else:
-        plt.show()
 
 
 ## get authorization
@@ -140,11 +117,8 @@ for y in range(y1, y2 + 1):
             "device/statistics/echarts", {"sn": sn, "types": 3, "rangeDate": rd}
         )
         for d, k in zip(data["xAxisData"], data["series"][0]["data"]):
-            d = dmy2ymd(d)
-            if debug:
-                print(d, k)
             if k != None:
-                date.append(d)
+                date.append(dmy2ymd(d))
                 kwh.append(k)
 
 # append newly fetched data to old data loaded from file:
@@ -168,7 +142,8 @@ df["day"] = df.date.dt.day
 
 # plot kWh/d:
 df.plot(x="date", y="kWh", grid=True, figsize=(15, 5))
-do_plot()
+plt.tight_layout()
+plt.show()
 
 # plot kWh/month:
 kWh_m = df.groupby(["year", "month"]).kWh.sum().reset_index()
@@ -187,20 +162,23 @@ ax.legend(
     ]
 )
 ax.set_title(f"Overall Energy Production: {kWh_m.kWh.sum():.0f} kWh", weight="bold")
-do_plot()
+plt.tight_layout()
+plt.show()
 
 # boxplot for kWh/d, grouped by year,month:
 dfx = df.query(f'date<"{last_day}"')
 # usually incomplete last (current) day distorts box for current month
 dfx.boxplot("kWh", ["year", "month"], rot=90, showmeans=True, figsize=(10, 5))
-do_plot()
+plt.tight_layout()
+plt.show()
 
 # plot highest kWh/d:
 n = 30
 df.groupby("sdate").max().nlargest(n, "kWh").plot.scatter(
     "date", "kWh", grid=True, rot=90, title=f"{n} Highest Daily Energies", alpha=0.5
 )
-do_plot()
+plt.tight_layout()
+plt.show()
 
 
 ## plot calendars:
@@ -252,10 +230,7 @@ def plot_calendar(y, kwh):
     fig.suptitle(f"{y}: {total:.0f} kWh", fontweight="bold")
     for a in ax.ravel():
         a.set_axis_off()
-    if png and y == 2024:
-        plt.savefig("year.png")
-    else:
-        plt.show()
+    plt.show()
 
 
 kwh = {}
