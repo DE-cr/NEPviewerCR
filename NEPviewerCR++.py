@@ -184,7 +184,6 @@ plt.show()
 ## plot calendars:
 
 max_kwh_per_day = df.kWh.max()
-colorful = True
 
 month = [
     "January",
@@ -209,13 +208,9 @@ def plot_month(ax, m, kwh):
             kwh[d] = 0
     total = round(sum(kwh.values()))
     high = f"(max/d={max(kwh.values()):.1f})"
-    if colorful:
-        color = []
-        for d in kwh:  # hue: max:0=red to min:2/3=blue
-            color.append(hsv_to_rgb(((1 - kwh[d] / max_kwh_per_day) * 2 / 3, 1, 1)))
-        ax.bar(kwh.keys(), kwh.values(), color=color)
-    else:
-        ax.bar(kwh.keys(), kwh.values())
+    # hue: max:0=red to min:2/3=blue
+    c = [hsv_to_rgb(((1 - kwh[d] / max_kwh_per_day) * 2 / 3, 1, 1)) for d in kwh]
+    ax.bar(kwh.keys(), kwh.values(), color=c)
     ax.set_ylim(0, max_kwh_per_day)
     ax.set_title(f"{month[m-1]}: {total:.0f} kWh {high}", y=-0.11)
     return total
