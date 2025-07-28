@@ -149,9 +149,8 @@ plt.show()
 
 # plot kWh/month:
 kWh_m = df.groupby(["year", "month"]).kWh.sum().reset_index()
-ax = kWh_m.pivot(index="month", columns="year", values="kWh").plot(
-    kind="bar", width=0.8, figsize=(20, 5)
-)
+dfx = kWh_m.pivot(index="month", columns="year", values="kWh")
+ax = dfx.plot(kind="bar", width=0.8, figsize=(20, 5))
 for c in ax.containers:
     ax.bar_label(c, fmt="%.0f")
 ax.set_frame_on(False)
