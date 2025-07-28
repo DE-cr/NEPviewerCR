@@ -11,7 +11,8 @@ import requests
 import calendar
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.colors import hsv_to_rgb
+import matplotlib.colors as mcolors
+import seaborn as sns
 
 # read NEP account info from environment:
 account = os.environ["NEP_ACCOUNT"]
@@ -86,7 +87,8 @@ except:
         df = pd.DataFrame(columns=["date", "kWh"])
 
 if len(df):
-    # no need to re-fetch known data from NEP server
+    # no need to re-fetch known data from NEP server, but
+    # last day's value may have been incomplete
     first_day = df.date.max()
 
 
@@ -180,6 +182,18 @@ df.groupby("sdate").max().nlargest(n, "kWh").plot.scatter(
 plt.tight_layout()
 plt.show()
 
+# plot heatmap:
+dfx = df.sort_values(["month", "day"]).pivot(
+    index="year", columns=["month", "day"], values="kWh"
+)
+cmap = mcolors.LinearSegmentedColormap.from_list(
+    "BlueGreenYellowRed", ["#00f", "#0f0", "#ff0", "#f00"]
+)
+sns.set(rc={"figure.figsize": (20, len(df.year.unique()))})
+sns.heatmap(dfx, cmap=cmap)
+plt.tight_layout()
+plt.show()
+
 
 ## plot calendars:
 
@@ -209,7 +223,9 @@ def plot_month(ax, m, kwh):
     total = round(sum(kwh.values()))
     high = f"(max/d={max(kwh.values()):.1f})"
     # hue: max:0=red to min:2/3=blue
-    c = [hsv_to_rgb(((1 - kwh[d] / max_kwh_per_day) * 2 / 3, 1, 1)) for d in kwh]
+    c = [
+        mcolors.hsv_to_rgb(((1 - kwh[d] / max_kwh_per_day) * 2 / 3, 1, 1)) for d in kwh
+    ]
     ax.bar(kwh.keys(), kwh.values(), color=c)
     ax.set_ylim(0, max_kwh_per_day)
     ax.set_title(f"{month[m-1]}: {total:.0f} kWh {high}", y=-0.11)

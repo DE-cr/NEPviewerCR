@@ -56,7 +56,8 @@ To use `NEPviewerCR++.py`, you must provide it with your credentials for
 
 ![year](img/year.png)
 
+![heatmap](img/heatmap.png)
+
 ![boxplot](img/boxplot.png)
 
 ![top](img/top.png)
-
