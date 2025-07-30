@@ -49,13 +49,12 @@ data = get_data("device/list", {"page": {"size": 10}})
 # there may be more registered devices, but we only use the first one:
 data = data["list"][0]
 
-sid = data["sid"]
 sn = data["sn"]
 first_day = dmy2ymd(data["createdAt"])[:10]
 last_day = dmy2ymd(data["lastUpdate"])[:10]
 
 print(
-    f'Reading data for {data["modelName"]} #{data["sn"]}',
+    f'Reading data for {data["modelName"]} #{data["sn"]},',
     f'registered {dmy2ymd(data["createdAt"])} in {data["city"]}',
 )
 
