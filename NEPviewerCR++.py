@@ -107,7 +107,7 @@ for y in range(y1, y2 + 1):
         dd1 = d1 if y == y1 and m == m1 else 1
         dd2 = d2 if y == y2 and m == m2 else calendar.monthrange(y, m)[1]
         # NEP server doesn't handle rangeDate of a single day correctly:
-        if first_day == last_day:
+        if dd1 == dd2:
             if dd1 == 1:
                 dd2 = dd2 + 1
             else:
