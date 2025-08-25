@@ -189,6 +189,7 @@ cmap = mcolors.LinearSegmentedColormap.from_list(
 )
 sns.set(rc={"figure.figsize": (20, len(df.year.unique()))})
 sns.heatmap(dfx, cmap=cmap)
+plt.title("kWh per day")
 plt.tight_layout()
 plt.show()
 
